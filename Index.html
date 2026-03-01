@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Medrunner Alert</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Medrunner">
+
+  <!-- Optional: if you add icons, include these -->
+  <!-- <link rel="apple-touch-icon" href="icons/icon-192.png"> -->
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: auto;
+      padding: 16px;
+      padding-bottom: 24px;
+    }
+
+    h1 { text-align: center; margin: 10px 0 14px; }
+
+    input, textarea, button, select {
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: #ef4444;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* MEDICAL SECTION */
+    #medical-section {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 16px;
+    }
+
+    #medical-section h2 {
+      margin: 0 0 12px 0;
+      font-size: 18px;
+    }
+
+    .med-body {
+      display: grid;
+      grid-template-areas:
+        ". head ."
+        "leftArm chest rightArm"
+        ". pelvis ."
+        "leftLeg . rightLeg";
+      gap: 12px;
+      justify-items: center;
+      align-items: start;
+    }
+
+    .med-body::after {
+      content: "";
+      grid-area: pelvis;
+      width: 80px;
+      height: 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .med-part {
+      width: 110px;
+      background: rgba(0,0,0,0.18);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 14px;
+      padding: 10px 10px 12px 10px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    }
+
+    .med-label { font-size: 13px; opacity: 0.9; margin-bottom: 6px; }
+
+    .med-select {
+      width: 100%;
+      padding: 9px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(15,23,42,0.85);
+      color: #fff;
+      outline: none;
+    }
+
+    .head { grid-area: head; }
+    .chest { grid-area: chest; }
+    .leftArm { grid-area: leftArm; }
+    .rightArm { grid-area: rightArm; }
+    .leftLeg { grid-area: leftLeg; }
+    .rightLeg { grid-area: rightLeg; }
+
+    .hint {
+      margin-top: 10px;
+      font-size: 12px;
+      opacity: 0.75;
+      line-height: 1.35;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Medrunner Alert</h1>
+
+    <input id="location" placeholder="Location (e.g. ASD Facility)" autocomplete="off">
+    <input id="details" placeholder="Details" autocomplete="off">
+
+    <section id="medical-section">
+      <h2>Medical Assessment</h2>
+
+      <div class="med-body">
+        <div class="med-part head">
+          <div class="med-label">Head</div>
+          <select class="med-select" id="inj_head">
+            <option value="">None</option>
+            <option value="tier1">Tier 1</option>
+            <option value="tier2">Tier 2</option>
+            <option value="tier3">Tier 3</option>
+          </select>
+        </div>
+
+        <div class="med-part chest">
+          <div class="med-label">Chest</div>
+          <select class="med-select" id="inj_chest">
+            <option value="">None</option>
+            <option value="tier1">Tier 1</option>
+            <option value="tier2">Tier 2</option>
+            <option value="tier3">Tier 3</option>
+          </select>
+        </div>
+
+        <div class="med-part leftArm">
+          <div class="med-label">Left Arm</div>
+          <select class="med-select" id="inj_left_arm">
+            <option value="">None</option>
+            <option value="tier1">Tier 1</option>
+            <option value="tier2">Tier 2</option>
+            <option value="tier3">Tier 3</option>
+          </select>
+        </div>
+
+        <div class="med-part rightArm">
+          <div class="med-label">Right Arm</div>
+          <select class="med-select" id="inj_right_arm">
+            <option value="">None</option>
+            <option value="tier1">Tier 1</option>
+            <option value="tier2">Tier 2</option>
+            <option value="tier3">Tier 3</option>
+          </select>
+        </div>
+
+        <div class="med-part leftLeg">
+          <div class="med-label">Left Leg</div>
+          <select class="med-select" id="inj_left_leg">
+            <option value="">None</option>
+            <option value="tier1">Tier 1</option>
+            <option value="tier2">Tier 2</option>
+            <option value="tier3">Tier 3</option>
+          </select>
+        </div>
+
+        <div class="med-part rightLeg">
+          <div class="med-label">Right Leg</div>
+          <select class="med-select" id="inj_right_leg">
+            <option value="">None</option>
+            <option value="tier1">Tier 1</option>
+            <option value="tier2">Tier 2</option>
+            <option value="tier3">Tier 3</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="hint">
+        Tip: Add this to your iPhone Home Screen (Safari → Share → Add to Home Screen) for an app-like experience.
+      </div>
+    </section>
+
+    <button onclick="sendAlert()">Send Alert</button>
+  </div>
+
+  <script>
+    // Register Service Worker (PWA offline-ish support)
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js").catch(() => {});
+    }
+
+    function getMedicalAssessment() {
+      return {
+        head: document.getElementById("inj_head").value,
+        chest: document.getElementById("inj_chest").value,
+        leftArm: document.getElementById("inj_left_arm").value,
+        rightArm: document.getElementById("inj_right_arm").value,
+        leftLeg: document.getElementById("inj_left_leg").value,
+        rightLeg: document.getElementById("inj_right_leg").value,
+      };
+    }
+
+    function sendAlert() {
+      const alertData = {
+        location: document.getElementById("location").value,
+        details: document.getElementById("details").value,
+        medical: getMedicalAssessment()
+      };
+
+      console.log("Alert Data:", alertData);
+      alert("Alert Saved (check console)\n\nNext step: wire this to your webhook/SMS.");
+    }
+  </script>
+</body>
+</html>
